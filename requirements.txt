@@ -1,0 +1,1 @@
+python-gammu==3.1

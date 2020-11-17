@@ -2,8 +2,8 @@ import commands
 import os
 
 
-def updateRepo():  
-    res = os.system("git checkout master")
+def updateRepo():
+    res = os.system("git checkout main")
     res =+ os.system("git pull")
     return res, True
 
@@ -18,4 +18,4 @@ def getHelp():
         if help_text:
             return_string += str(help_text).replace("    ", "") + "\n\n"
     return return_string, True
-special
+

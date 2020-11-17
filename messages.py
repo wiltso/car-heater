@@ -45,7 +45,7 @@ def readMessages():
 
 def updateMessageFile():
     res = os.system("sudo gammu getallsms > files/allMessages.txt")
-    
+
 
 
 def saveUnHandeldMessages(messages):

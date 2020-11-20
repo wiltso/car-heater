@@ -19,3 +19,10 @@ def getHelp():
             return_string += str(help_text).replace("    ", "") + "\n\n"
     return return_string, True
 
+
+def getPath():
+    path = os.path.dirname(os.path.abspath(__file__))
+    command_folder = os.path.basename(path)
+    path = path[:len(path) - len(command_folder)]
+    return path + "/"
+

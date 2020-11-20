@@ -1,3 +1,4 @@
+from .special import getPath
 from .base import readData, writeData
 
 
@@ -19,12 +20,12 @@ def getUnhandeldMessages():
     """\
     getUnhandeldMessages: Gets all the unhandeld messages and deletes them from the logs\
     """
-    data = readData(readFile="unHandeldMessages.json")
+    data = readData(readFile=getPath() + "unHandeldMessages.json")
     message = ""
     if not data:
         return "There are no unhandeld messages", True
     for dataMessage in data:
         message += str("Number: %s\nMessage: %s\n\n\n" % (dataMessage["number"], dataMessage["text"]))
-    writeData(None, readFile="unHandeldMessages.json")
+    writeData(None, readFile=getPath() + "unHandeldMessages.json")
     return message, True
 

@@ -8,7 +8,7 @@ from itertools import chain
 def readMessages():
     text = ""
     numberFinder = re.compile('\+\d+')
-    with open("files/allMessages.txt") as f:
+    with open(commands.getPath() + "files/allMessages.txt") as f:
         text = f.read()
 
     # Removes the bottom part telling how many messages there are
@@ -44,25 +44,36 @@ def readMessages():
 
 
 def updateMessageFile():
-    res = os.system("sudo gammu getallsms > files/allMessages.txt")
+    res = os.system("gammu getallsms > %sfiles/allMessages.txt" % (commands.getPath()))
+
+
+
+def removeOldMessages():
+    os.system("gammu deleteallsms 1")
+    os.system("gammu deleteallsms 2")
+    os.system("gammu deleteallsms 3")
+    os.system("gammu deleteallsms 4")
 
 
 
 def saveUnHandeldMessages(messages):
-    oldMessages = commands.readData(readFile="files/unHandeldMessages.json")
+    oldMessages = commands.readData(readFile=commands.getPath() + "files/unHandeldMessages.json")
     if oldMessages:
         messages.extend(oldMessages)
-    commands.writeData(messages, readFile="files/unHandeldMessages.json")
+    commands.writeData(messages, readFile=commands.getPath() + "files/unHandeldMessages.json")
 
 
 def handelMessages(messages):
     successMessages = []
     unHandeldMessages = []
     for message in messages:
+        if not "number" in message:
+             continue
         splittedMessage = message["text"].split("\n")
         command = splittedMessage[0]
         kwargs = [var.split("& ") for var in splittedMessage[1:]]
         kwargs = iter(list(chain.from_iterable(kwargs)))
+        print(messages)
         if message["number"] in commands.getAdminNumbers():
             kwargs = dict(zip(kwargs, kwargs))
             returnMessage, success = executeCommand(command, kwargs)
@@ -70,7 +81,7 @@ def handelMessages(messages):
             if not success:
                 unHandeldMessages.append(message)
 
-        elif (message["number"] in commands.getAuthenticatedNumbers() and 
+        elif (message["number"] in commands.getAuthenticatedNumbers() and
                 command in commands.getAuthenticatedNumbersCommands()):
             kwargs = dict(zip(kwargs, kwargs))
             returnMessage, success = executeCommand(command, kwargs)

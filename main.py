@@ -1,6 +1,6 @@
-from messages import readMessages, updateMessageFile, handelMessages
+#! /usr/bin/python
+from messages import readMessages, updateMessageFile, handelMessages, removeOldMessages
 import time
-
 
 while True:
     updateMessageFile()

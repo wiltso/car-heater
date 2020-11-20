@@ -1,10 +1,12 @@
+
 import commands
+import subprocess
 import os
 
 
-def updateRepo():  
-    res = os.system("git checkout master")
-    res =+ os.system("git pull")
+def updateRepo():
+    res = subprocess.call(["git", "pull"], cwd=commands.getPath())
+    print(res)
     return res, True
 
 
@@ -18,4 +20,18 @@ def getHelp():
         if help_text:
             return_string += str(help_text).replace("    ", "") + "\n\n"
     return return_string, True
-special
+
+
+def getPath():
+    path = os.path.dirname(os.path.abspath(__file__))
+    command_folder = os.path.basename(path)
+    path = path[:len(path) - len(command_folder)]
+    return path + "/"
+
+
+def command(arg, path=None):
+    if not path:
+        path = getPath()
+    res = subprocess.call(arg.split(" "), cwd=path)
+    print(res)
+    return res, True

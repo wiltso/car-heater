@@ -4,7 +4,7 @@ from .remove import removeNumber, removeCommandFromGroup
 from .add import addNumber, addCommandToGroup
 from .pi import turnOnHeater, turnOffHeater
 from .base import readData, writeData
-from .special import updateRepo, getHelp, getPath
+from .special import updateRepo, getHelp, getPath, command
 from .messages import sendMessage
 
 
@@ -26,4 +26,5 @@ __all__ = [
     "sendMessage",
     "getHelp",
     "getPath",
+    "command",
 ]

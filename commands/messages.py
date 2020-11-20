@@ -3,9 +3,9 @@ import os
 
 def sendMessage(number, message):
     """\
-    sendMessage: function to send a messages to a number 
+    sendMessage: function to send a messages to a number
     :param number: The phone number that the message will be sent to
-    :type number: String 
+    :type number: String
     :param message: The message that will be sent
     :type group: message\
     """

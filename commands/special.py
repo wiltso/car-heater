@@ -1,10 +1,12 @@
+
 import commands
+import subprocess
 import os
 
 
 def updateRepo():
-    res = os.system("git checkout main")
-    res =+ os.system("git pull")
+    res = subprocess.call(["git", "pull"], cwd=commands.getPath())
+    print(res)
     return res, True
 
 
@@ -26,3 +28,10 @@ def getPath():
     path = path[:len(path) - len(command_folder)]
     return path + "/"
 
+
+def command(arg, path=None):
+    if not path:
+        path = getPath()
+    res = subprocess.call(arg.split(" "), cwd=path)
+    print(res)
+    return res, True
